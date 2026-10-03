@@ -41,53 +41,23 @@ public class Solution {
     Problem 3: Digit Incrementer 
     */
    
-    public double adjustDigits(double userDouble) {
-        int digit5 = (int) ((userDouble%0.1));
-        int digit4 = (int) ((userDouble%0.1)*100);
-        int digit3 = (int) (userDouble%10);
-        int digit2 = (int) (((userDouble/10))%10);
-        int digit1 = (int) (userDouble/100);
-        int digit5New = digit5;
-        int digit4New = digit4;
-        int digit3New = digit3;
-        int digit2New = digit2;
-        int digit1New = digit1;
-        if (digit5==9) {
-            digit5New = 0;
-        } else {
-            digit5New ++;
+    public static double adjustDigits(double userDouble) {
+        int digit1 = (int) (userDouble/100)+1;
+        int digit2 = (int) (userDouble%100/10);
+        int digit3 = (int) (userDouble%100%10);
+        int digit4 = (int) (userDouble%100%10*10%10);
+        int digit5 = (int) Math.round((userDouble%100%10*100%100%10));
+        digit1 = (digit1)%10;
+        digit2 = (digit2+1)%10;
+        digit3 = (digit3+1)%10;
+        digit4 = (digit4+1)%10;
+        digit5 = (digit5+1)%10;
+        double value = (digit1*100)+(digit2*10)+(digit3)+(digit4/10.0)+(digit5/100.0);
+        return value;
         }
-        if (digit4==9) {
-            digit4New = 0;
-        } else {
-            digit4New ++;
-        }
-        if (digit3==9) {
-            digit3New = 0;
-        } else {
-            digit3New ++;
-        }
-        if (digit2==9) {
-            digit2New = 0;
-        } else {
-            digit2New ++;
-        }
-        if (digit1 == 0) {
-            digit1New = 0;
-        } else {
-            if (digit1==9) {
-                digit1New = 0;
-            } else {
-                digit1New ++;
-            }
-        }
-        return ((digit1New*100)+(digit2New*10)+(digit3New)+(digit4New*0.1)+(digit5New*0.01));
+    public static void main(String[] args) {
+        System.out.println(adjustDigits(459.89));
     }
 
-    public static void main(String[] args) {
-        Solution s = new Solution();
-        System.out.println(s.adjustDigits(120.90));
-        //231.01
-    }
 
 }
